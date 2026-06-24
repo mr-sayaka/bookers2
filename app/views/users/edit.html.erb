@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="col-md-5 mx-auto">
+
+    <h1 class="py-3 text-reft">User info</h1>
+    <% if @user.errors.any? %>
+      <h3>
+        <%= @user.errors.count %> error prohibited this obj from being saved:
+      </h3>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= form_with model: @user do |f| %>
+      <div class="mb-3">
+        <%= f.label :name, "Name", class: "form-label d-block" %>
+        <%= f.text_field :name, id:"inputName" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :image, "Image", class: "form-label d-block" %>
+        <%= f.file_field :profile_image, accept: "image/*" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :introduction, "Introduction", class: "form-label d-block" %>
+        <%= f.text_field :introduction, id: "inputIntroduction" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.submit "Update User", class: "btn btn-secondary text-white" %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

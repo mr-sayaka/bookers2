@@ -1,0 +1,57 @@
+<%= render 'layouts/list', user: @user %>
+<section class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+
+<table class="table">
+  <tr class="border-top">
+    <!-- 画像 -->
+    <td class="px-3 align-top">
+      <%= link_to user_path(@book.user), class: "d-flex flex-column align-items-center text-decoration-none" do %>
+        <% if @book.user.profile_image.attached? %>
+          <%= image_tag @book.user.profile_image, size: "100x100" %>
+        <% else %>
+          <%= image_tag 'no_image.jpg', size: "100x100" %>
+        <% end %>
+
+        <span class="mt-2">
+          <%= @book.user.name %>
+        </span>
+      <% end %>
+    </td>
+
+    <!-- タイトル -->
+    <td class="px-3 align-top">
+      <%= link_to @book.title, book_path(@book), class: "text-decoration-none" %>
+    </td>
+
+    <!-- 説明 -->
+    <td class="px-3 align-top">
+      <%= @book.body %>
+    </td>
+
+
+    <% if @book.user == Current.user %>
+
+      <!-- 編集 -->
+      <td class="px-3 align-top">
+        <%= link_to "Edit",
+          edit_book_path(@book.id),
+          class: "btn btn-success text-white" %>
+      </td>
+
+      <!-- 削除 -->
+      <td class="px-3 align-top">
+        <%= link_to "Destroy",
+          book_path(@book.id),
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "本当に消しますか？"
+          },
+          class: "btn btn-danger text-white" %>
+      </td>
+
+    <% end %>
+
+  </tr>
+</table>
+</section>
