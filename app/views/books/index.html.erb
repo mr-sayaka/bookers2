@@ -24,6 +24,7 @@
       <th class="py-3"></th>
       <th class="py-3">Title</th>
       <th class="py-3">Opinion</th>
+      <th class="py-3"></th>
     </tr>
 
     <% @books.each do |book| %>
@@ -44,6 +45,22 @@
           
         <td class="align-top p-2">
           <%= book.body %>
+        </td>
+
+        <td class="align-top p-2">
+          <% if book.favorited_by?(Current.user) %>
+            <%= link_to book_favorite_path(book), data: { turbo_method: :delete } do %>
+              ♥<%= book.favorites.count %>
+            <% end %>
+          <% else %>
+            <%= link_to book_favorite_path(book), data: { turbo_method: "post" } do %>
+              ♡<%= book.favorites.count %>
+            <% end %>
+          <% end %>
+        </td>
+
+        <td class="align-top p-2">
+          <p>コメント数：<%= book.book_comments.count %></p>
         </td>
       </tr>
       <% end %>
