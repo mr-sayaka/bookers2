@@ -28,7 +28,27 @@
         <td class="align-top p-2">
           <%= user.name %>
         </td>
-          
+
+        <td class="align-top p-2>
+          フォロー数：
+          <%= link_to user.followings.count, followings_user_path(user) %>
+        </td>
+
+        <td class="align-top p-2>
+          フォロワー数：
+          <%= link_to user.followers.count, followers_user_path(user) %>
+        </td>
+
+        <td class="align-top p-2">
+          <% unless user == Current.user %>
+            <% if Current.user.following?(user) %>
+              <%= link_to "フォロー外す", user_relationships_path(user), data: { turbo_method: :delete } %>
+            <% else %>
+              <%= link_to "フォローする", user_relationships_path(user), data: { turbo_method: :post } %>
+            <% end %>
+          <% end %>
+        </td>
+
         <td class="align-top p-2">
           <%= link_to "Show", user_path(user.id) %>
         </td>
