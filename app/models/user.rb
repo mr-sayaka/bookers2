@@ -57,4 +57,19 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
+
+  def self.looks(search, word)
+    case search
+    when "perfect_match"
+      where(name: word)
+    when "forward_match"
+      where("name LIKE ?", "#{word}%")
+    when "backward_match"
+      where("name LIKE ?", "%#{word}")
+    when "partial_match"
+      where("name LIKE ?", "%#{word}%")
+    else
+      all
+    end
+  end
 end

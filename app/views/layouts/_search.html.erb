@@ -1,0 +1,18 @@
+<section class="col-md-8 offset-md-1">
+  <% if Current.user %>
+    <div class="container mt-2">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.select :range, [["ユーザー", "User"], ["投稿", "Book"]] %>
+
+        <%= f.select :search,
+        [["完全一致", "perfect_match"],
+         ["前方一致", "forward_match"],
+         ["後方一致", "backward_match"],
+         ["部分一致", "partial_match"]] %>
+
+        <%= f.text_field :word, placeholder: "検索ワード" %>
+
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+  <%end%>

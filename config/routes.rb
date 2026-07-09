@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   end
 
   resources :passwords, param: :token
+
   root to: "homes#top"
   get "home/about", to: "homes#about"
+
+  get "search", to: "searches#search"
+  
   resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resource :favorite, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
