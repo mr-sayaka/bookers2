@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@book, :favorite) do %>
+  <%= render 'book_comments/create.turbo_stream.erb', book: @book %>
+<% end %>
