@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :groups, only: [:new, :create, :index, :show, :edit, :update]
+
   resources :passwords, param: :token
 
   root to: "homes#top"

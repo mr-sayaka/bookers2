@@ -1,0 +1,40 @@
+<h2>Groups</h2>
+
+<%= link_to "Create Group", new_group_path, class: "btn btn-primary" %>
+
+<table>
+
+  <tr>
+    <th>画像</th>
+    <th>名前</th>
+    <th>紹介</th>
+    <th>人数</th>
+  </tr>
+
+<% @groups.each do |group| %>
+
+<tr>
+
+<td>
+<% if group.image.attached? %>
+  <%= image_tag group.image, size: "50x50" %>
+<% end %>
+</td>
+
+<td>
+<%= link_to group.name, group_path(group) %>
+</td>
+
+<td>
+<%= group.introduction %>
+</td>
+
+<td>
+<%= group.users.count %>
+</td>
+
+</tr>
+
+<% end %>
+
+</table>

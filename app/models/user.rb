@@ -25,6 +25,14 @@ class User < ApplicationRecord
            through: :reverse_relationships,
            source: :follower
 
+  has_many :group_users, dependent: :destroy
+  has_many :groups, through: :group_users
+
+  has_many :owned_groups,
+           class_name: "Group",
+           foreign_key: :owner_id,
+           dependent: :destroy
+
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   validates :name,
             presence: true,
